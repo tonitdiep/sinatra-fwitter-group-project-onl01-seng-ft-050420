@@ -9,11 +9,12 @@ class ApplicationController < Sinatra::Base
   get '/' do 
     "Welcome to Fwitter"
   end
+  
   get 'signup' do 
-    erb :'/users/signup'
+    erb :'/signup'
   end
-  post '/users/signup' do 
+  post 'signup' do 
     @user = User.create(username: params[:username], password: params[:password], email: params[:email])
-    redirect '/users/signup'
+    redirect '/signup'
   end
 end
