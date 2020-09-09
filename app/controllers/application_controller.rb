@@ -8,6 +8,7 @@ class ApplicationController < Sinatra::Base
   end
   get '/' do 
     "Welcome to Fwitter"
+    
   end
 #   get '/signup' do 
 #   hhhh
