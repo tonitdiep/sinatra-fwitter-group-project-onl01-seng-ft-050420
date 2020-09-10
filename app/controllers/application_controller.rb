@@ -5,19 +5,14 @@ class ApplicationController < Sinatra::Base
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
+    enable :sessions
+    set :session_secret, "secret"
   end
   get '/' do 
     "Welcome to Fwitter"
     
   end
-#   get '/signup' do 
-#   hhhh
-#     # erb :signup
-#   end
-# post '/signup' do 
-#     @user = User.create(username: params[:username], password: params[:password], email: params[:email])
-#     redirect '/signup'
-#   end
+
 end
 
   
