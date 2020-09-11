@@ -1,8 +1,7 @@
-<div class="container">
-<h1>Welcome, Toni</h1>  
-<!--<form action '/tweets' method="POST">-->
+<!--<div class="container">-->
+<h1>Welcome, <%= current_user.username %></h1>  
 <%= @tweets.each do |tweets| %>
 
 <% end %>
-<!--</form>-->
-</div>
+
+<!--</div>-->
