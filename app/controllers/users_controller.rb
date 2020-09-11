@@ -1,34 +1,53 @@
 require 'pry'
+
 class UsersController < ApplicationController
 
   get '/signup' do 
-
-    erb :'/users/signup'
+      if !is_logged_in? 
+        erb :'/users/signup'
+      else
+        redirect '/tweets'
+      end
   end
+  
   post '/signup' do 
-    @user = User.create(username: params[:username], password: params[:password], email: params[:email])
-      if @user.valid?    
+   
+      if params[:username]  != "" && params[:email] != "" && params[:password] != ""
+        @user = User.create(username: params[:username], password: params[:password], email: params[:email])
+      end  
+      if @user
             session[:user_id] = @user.id
             redirect '/tweets/index'
-      else
+      else 
             redirect '/users/signup'
       end
   end
   
   get '/login' do
-    
-    erb :'/users/login'
+    if !is_logged_in?
+      erb :'/users/login'
+    else
+      redirect '/tweets/index'
+    end
   end
-  # post '/login' do 
+  post '/login' do 
+    @user = User.find_by_username(params[:username])
+   
+    if @user && @user.authenticate(params[:password])
+        session[:user_id] = @user.id
+          flash[:message] = "Welcome"
+        redirect '/tweets'  
+    else
  
-  #   @user = User.create(username: params[:username], password: params[:password], email: params[:email])
-  #       if @user.valid?    
-  #           session[:user_id] = @user.id
-  #         redirect '/tweets/index'  
-  #       else
-  #         redirect '/users/login'
-  #       end
+        redirect '/users/login'
+    end
         
-  # end
+  end
+  
+  get '/logout' do 
+    session.destroy
+    redirect '/login'
+  end
+  
   
 end
