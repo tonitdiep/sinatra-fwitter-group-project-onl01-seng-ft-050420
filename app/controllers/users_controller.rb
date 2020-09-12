@@ -45,9 +45,19 @@ class UsersController < ApplicationController
   end
   
   get '/logout' do 
-    session.destroy
-    redirect '/login'
+
+    if !!current_user
+      redirect '/login'
+    else 
+      redirect '/logout'
+    end
   end
   
+  post '/logout' do
+    # binding.pry
+      session.destroy
+      redirect '/login'
+  end
   
 end
+
