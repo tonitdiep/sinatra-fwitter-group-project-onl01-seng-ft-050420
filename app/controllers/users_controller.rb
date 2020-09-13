@@ -53,11 +53,21 @@ class UsersController < ApplicationController
     end
   end
   
-  post '/logout' do
-    # binding.pry
-      session.destroy
-      redirect '/login'
+  # post '/logout' do
+  #     session.destroy
+  #     redirect '/login'
+      
+  # end
+  
+    
+  get '/users/:id' do
+# binding.pry
+
+    @user = User.create(username: params[:username], password: params[:password], email: params[:email])
+    @user = User.find_by_id(params[:id])
+    erb :'/show'
   end
+  
   
 end
 
