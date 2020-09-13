@@ -59,12 +59,13 @@ class UsersController < ApplicationController
       
   # end
   get '/users/:slug' do
-binding.pry
+y
     @user = User.find_by_slug(params[:slug])
     erb :'/users/show'
   end
   
   post '/users' do  #creating a new user
+  binding.pry
     @user = User.create(username: params[:username], password: params[:password], email: params[:email])
 
     erb :'tweets/new'
