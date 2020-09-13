@@ -61,13 +61,16 @@ class UsersController < ApplicationController
   
     
   get '/users/:id' do
-# binding.pry
 
-    @user = User.create(username: params[:username], password: params[:password], email: params[:email])
     @user = User.find_by_id(params[:id])
-    erb :'/show'
+    erb :'/tweets/show'
   end
   
+  post '/users' do  #creating a new user
+    @user = User.create(username: params[:username], password: params[:password], email: params[:email])
+
+    erb :'tweets/new'
+  end
   
 end
 
