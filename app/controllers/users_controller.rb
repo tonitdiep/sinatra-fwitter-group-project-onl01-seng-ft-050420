@@ -58,12 +58,10 @@ class UsersController < ApplicationController
   #     redirect '/login'
       
   # end
-  
-    
-  get '/users/:id' do
-
-    @user = User.find_by_id(params[:id])
-    erb :'/tweets/show'
+  get '/users/:slug' do
+binding.pry
+    @user = User.find_by_slug(params[:slug])
+    erb :'/users/show'
   end
   
   post '/users' do  #creating a new user
@@ -71,6 +69,8 @@ class UsersController < ApplicationController
 
     erb :'tweets/new'
   end
+  
+    
   
 end
 
