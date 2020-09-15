@@ -5,21 +5,28 @@ class TweetsController < ApplicationController
     if !!is_logged_in?
       erb :'/tweets/index'
     else
-      redirect '/users/login'
+      redirect '/login'
     end
   end
 
-  get '/tweets/:id' do
+  get '/tweets/new' do
 
-    @user = User.find_by_id(params[:id])
-    erb :'/users/show'
+    erb :'/tweets/new'
   end
   
-  post '/users' do  #creating a new user
-    @user = User.create(username: params[:username], password: params[:password], email: params[:email])
-
-    erb :'tweets/new'
+  post '/tweets' do 
+    
+    @tweet = Tweet.create(content: params[:content], user_id: current_user.id)
+    
+    redirect "/tweets/#{@tweet.id}"
   end
+  
+  get '/tweets/:id' do
+    @tweet = Tweet.find_by_id(params[:id])
+    erb :'/tweets/show_tweet'
+  end
+  
+
   
   
   
