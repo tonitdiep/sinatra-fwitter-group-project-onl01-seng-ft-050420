@@ -18,8 +18,8 @@ class TweetsController < ApplicationController
   end
   
   post '/tweets' do 
-    if is_logged_in? == params[:content]
-      erb :'tweets/new'
+    if current_user && params[:content] == ""
+      redirect "tweets/new"
     else
       @tweet = Tweet.create(content: params[:content], user_id: current_user.id)
       redirect "/tweets/#{@tweet.id}"
@@ -27,8 +27,8 @@ class TweetsController < ApplicationController
   end
   
   get '/tweets/:id' do #show action
-    @tweet = Tweet.find_by_id(params[:id])
-    erb :'/tweets/show_tweet'
+      @tweet = Tweet.find_by_id(params[:id])
+      erb :'/tweets/show_tweet'
   end
   
   get '/tweets/:id/edit' do #load edit form
