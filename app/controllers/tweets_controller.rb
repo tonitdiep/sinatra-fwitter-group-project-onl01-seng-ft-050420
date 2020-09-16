@@ -27,14 +27,21 @@ class TweetsController < ApplicationController
   end
   
   get '/tweets/:id' do #show action
+    if is_logged_in?
       @tweet = Tweet.find_by_id(params[:id])
       erb :'/tweets/show_tweet'
+    else
+      redirect '/login'
+    end
   end
   
   get '/tweets/:id/edit' do #load edit form
-
-    @tweet = Tweet.find_by_id(params[:id])
-    erb :'/tweets/edit'
+    if is_logged_in?
+      @tweet = Tweet.find_by_id(params[:id])
+      erb :'/tweets/edit'
+    else 
+      redirect '/login'
+    end
   end
   
   patch '/tweets/:id' do
