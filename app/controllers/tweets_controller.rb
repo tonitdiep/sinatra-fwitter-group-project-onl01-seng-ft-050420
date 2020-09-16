@@ -19,7 +19,7 @@ class TweetsController < ApplicationController
   
   post '/tweets' do 
     if is_logged_in && content == ""
-    
+      erb 'tweets/new'
     else
       @tweet = Tweet.create(content: params[:content], user_id: current_user.id)
       redirect "/tweets/#{@tweet.id}"
