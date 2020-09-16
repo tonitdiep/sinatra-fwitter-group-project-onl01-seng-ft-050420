@@ -10,7 +10,6 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets/new' do
-# binding.pry
     if is_logged_in?
       erb :'/tweets/new'
     else
@@ -19,10 +18,12 @@ class TweetsController < ApplicationController
   end
   
   post '/tweets' do 
+    if is_logged_in && content == ""
     
-    @tweet = Tweet.create(content: params[:content], user_id: current_user.id)
-    
-    redirect "/tweets/#{@tweet.id}"
+    else
+      @tweet = Tweet.create(content: params[:content], user_id: current_user.id)
+      redirect "/tweets/#{@tweet.id}"
+    end
   end
   
   get '/tweets/:id' do #show action
@@ -37,18 +38,21 @@ class TweetsController < ApplicationController
   end
   
   patch '/tweets/:id' do
-    if current_user && is_logged_in? == content.user_id
-      @tweet = Tweet.find_by_id(params[:id])
+    # binding.pry
+    @tweet = Tweet.udpate(content: params[:content], user_id: current_user.id)
+      # @tweet = Tweet.find_by_id(params[:id])
       # @tweet.content = params[:content]
       # @tweet.user_id = params[:user_id]
       # @tweet.save
-      @tweet.update(content: params[:content], user_id: params[:user_id])
-       @tweet = Tweet.create(content: params[:content], user_id: current_user.id)
-    
       erb :'/tweets/show_tweet'
-    else
-      redirect "/tweets/#{@tweet.id}"
-    end
+    # else
+      # redirect "/tweets/#{@tweet.id}"
+  end
+  
+  delete '/tweets/:id' do 
+      @tweet = Tweet.find_by_id(params[:id])
+      @tweet.delete 
+      redirect '/tweets'
   end
   
   
