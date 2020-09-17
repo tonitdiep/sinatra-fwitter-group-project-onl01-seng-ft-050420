@@ -3,19 +3,16 @@
 
 <form action="/tweets/<%=@tweet.id %>" method="post">
 Tweet Content
-  <form method="get" action="/tweets/<%=@tweet.id%>">
-    <input id="hidden" type="hidden" name="_method" value="PATCH">
+  <form method="post" action="/tweets/<%=@tweet.id%>">
+    <input id="hidden" type="hidden" name="_method" value="DELETE">
     <input type="text" name="content">  
     <input type="submit" value="Delete Tweet">
   </form>
-  
-  <form method="get" action="/tweets/<%=@tweet.id%>/edit">
-    <input type="submit" value="Edit Tweet">
-  </form>
 
- <!--<form="get" action="/tweets/<%= @tweet.content%>">-->
-    <!--<input type="submit" value="Submit">-->
- <!--</form>-->
+    
+  <a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet </a>
+
+
  
 </form>
   
