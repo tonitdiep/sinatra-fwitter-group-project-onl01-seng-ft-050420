@@ -5,10 +5,15 @@
 Tweet Content
   <input id="hidden" type="hidden" name="_method" value="patch">
   <input type="text" name="content">
-  <input type="submit" value="Delete Tweet">
-  <input type="submit" value="Edit Tweet">
-  <input type="submit" value="Submit">
   
-</form>
+  <form="get" action="/tweets/<%= @tweet.id%>">
+    
+  <input type="submit" value="Delete Tweet">
+  </form>
+  
+  <form="get" action="/tweets/<%= @tweet.id%>/edit">
+  <input type="submit" value="Edit Tweet">
+  </form>
 
-<!--display info for a single tweet: tweet id has the user_id and content-->
+ <!--<input type="submit" value="Submit">-->
+  
