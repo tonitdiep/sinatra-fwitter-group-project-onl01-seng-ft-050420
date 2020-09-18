@@ -30,6 +30,7 @@ class UsersController < ApplicationController
       redirect '/tweets'
     end
   end
+  
   post '/login' do 
     @user = User.find_by_username(params[:username])
    
@@ -38,7 +39,6 @@ class UsersController < ApplicationController
           flash[:message] = "Welcome"
         redirect '/tweets'  
     else
- 
         redirect '/login'
     end
         
@@ -56,8 +56,8 @@ class UsersController < ApplicationController
   # post '/logout' do
   #     session.destroy
   #     redirect '/login'
-      
   # end
+  
   get '/users/:slug' do
     @tweets = current_user.tweets
     @user = User.find_by_slug(params[:slug]) #model slug
