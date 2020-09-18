@@ -61,8 +61,7 @@ class TweetsController < ApplicationController
     
     if is_logged_in? 
       # binding.pry
-      
-      
+
       @tweet = Tweet.find_by_id(params[:id])
         if @tweet.user_id == current_user.id 
            @tweet.destroy 
