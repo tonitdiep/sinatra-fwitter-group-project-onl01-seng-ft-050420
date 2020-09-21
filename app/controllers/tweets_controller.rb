@@ -27,6 +27,7 @@ class TweetsController < ApplicationController
   end
   
   get '/tweets/:id' do #show action
+
     if is_logged_in?
       @tweet = Tweet.find_by_id(params[:id])
       erb :'/tweets/show_tweet'
@@ -36,6 +37,7 @@ class TweetsController < ApplicationController
   end
   
   get '/tweets/:id/edit' do #load edit form
+
     if is_logged_in? 
       @tweet = Tweet.find_by_id(params[:id])
         if @tweet.user == current_user
@@ -47,6 +49,7 @@ class TweetsController < ApplicationController
   end
   
   patch '/tweets/:id' do
+    
         if is_logged_in? && params[:content] != ""
           
           @tweet = Tweet.find_by_id(params[:id])
