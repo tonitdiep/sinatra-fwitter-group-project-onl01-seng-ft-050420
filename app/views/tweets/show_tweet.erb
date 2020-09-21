@@ -1,17 +1,8 @@
 <h1>Show Page</h1> 
 
-<form action="/tweets/<%=@tweet.content%>" method="post">
-Tweet Content
-  <form method="post" action="/tweets/<%=@tweet.id%>">
-    <!--<input id="hidden" type="hidden" name="_method" value="DELETE">-->
-    <input type="text" name="content">  
-    <!--<input type="submit" value="Delete Tweet">-->
-  </form>
+<%=@tweet.content%>
 
-    
-  <!--<a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet </a>-->
 
-</form>
 
 <form method="post" action="/tweets/<%=@tweet.id%>/edit">
   <input id="hidden" type="hidden" name="_method" value="EDIT">
@@ -22,5 +13,7 @@ Tweet Content
   <input id="hidden" type="hidden" name="_method" value="DELETE">
   <input type="submit" value="Delete Tweet">
 </form>  
+
+
   
  
