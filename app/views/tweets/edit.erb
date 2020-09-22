@@ -7,12 +7,9 @@
 </form>
 
 
-<form method="post" action="/tweets/<%=@tweet.id%>/edit">
-  <input id="hidden" type="textarea" name="_method" value="EDIT">
-  <input type="submit" value="Edit Tweet">
-</form>  
 
-<form method="post" action="/tweets/<%=@tweet.id%>/delete">
-  <input id="hidden" type="textarea" name="_method" value="DELETE">
+
+<form method="post" action="/tweets/<%=@tweet.id%>">
+  <input id="hidden" type="hidden" name="_method" value="DELETE">
   <input type="submit" value="Delete Tweet">
 </form>  

@@ -36,22 +36,34 @@ class TweetsController < ApplicationController
     end
   end
   
+  # [#<Tweet id: 1, content: "submit this is content via tweets/1/edit", user_id: 5>, #<Tweet id: 2, content: "blueberries and apples",user_id: 3>, #<Tweet id: 3, content: "creating this tweet again", user_id: 3>]
+  
+#   [["id", 3], ["LIMIT", 1]]
+# => #<User id: 3, username: "toni", email: "toni@toni.com", password_digest: "$2a$12$Mf9u3tOWF6Xl.j3SbDnvsO9lgtoNLYuKrr5op6Gy3Sb...">
+
+# [["id", 5], ["LIMIT", 1]]
+# => #<User id: 5, username: "basil", email: "basil@basil.com", password_digest: "$2a$12$rOMGM7eBdDJ35M/eBw5SOucdgBJdTMp6xEyLabpLyS8...">
   get '/tweets/:id/edit' do #load edit form
-# binding.pry
+  # binding.pry
     if is_logged_in? 
       @tweet = Tweet.find_by_id(params[:id])
         if @tweet.user == current_user
            erb :'/tweets/edit'
+          
+        else
+          redirect '/tweets'
+          
         end
     else 
       redirect '/login'
     end
+    
   end
   
   patch '/tweets/:id' do
 # binding.pry
         if is_logged_in? && params[:content] != "" 
-          
+          # is_logged_in? && params[:content] != "" && current_user
           @tweet = Tweet.find_by_id(params[:id])
           @tweet.update(content: params[:content]) 
           redirect "/tweets/#{@tweet.id}"
@@ -68,9 +80,11 @@ class TweetsController < ApplicationController
       
       @tweet = Tweet.find_by_id(params[:id])
         if @tweet.user_id == current_user.id 
-           @tweet.destroy 
+          @tweet.destroy 
         end
-     else
+      redirect '/tweets'
+      
+    else
         redirect '/login'   
     end
     
