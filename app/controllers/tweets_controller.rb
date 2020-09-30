@@ -63,7 +63,7 @@ class TweetsController < ApplicationController
   patch '/tweets/:id' do
 # binding.pry
         if is_logged_in? && params[:content] != "" 
-          # is_logged_in? && params[:content] != "" && current_user
+   
           @tweet = Tweet.find_by_id(params[:id])
           @tweet.update(content: params[:content]) 
           redirect "/tweets/#{@tweet.id}"
@@ -75,12 +75,13 @@ class TweetsController < ApplicationController
   end
   
   delete '/tweets/:id' do 
-    
+    # binding.pry
     if is_logged_in? 
-      
+      # binding.pry
       @tweet = Tweet.find_by_id(params[:id])
         if @tweet.user_id == current_user.id 
-          @tweet.destroy 
+          @tweet.delete 
+          # @tweet.destroy
         end
       redirect '/tweets'
       

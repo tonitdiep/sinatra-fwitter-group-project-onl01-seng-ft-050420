@@ -53,22 +53,10 @@ class UsersController < ApplicationController
     end
   end
   
-  # post '/logout' do
-  #     session.destroy
-  #     redirect '/login'
-      
-  #   if is_logged_in? 
-      
-  #     @tweet = Tweet.find_by_id(params[:id])
-  #       if @tweet.user_id == current_user.id 
-  #         @tweet.destroy 
-  #       end
-  #     redirect '/tweets'
-      
-  #   else
-  #       redirect '/login'   
-  #   end
-  # end
+  post '/logout' do
+      session.clear
+      redirect '/login'
+  end
   
   get '/users/:slug' do
     @tweets = current_user.tweets
